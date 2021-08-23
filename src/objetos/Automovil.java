@@ -1,6 +1,6 @@
 package objetos;
 
-public class Automovil {
+public class Automovil implements Comparable {
 	// Atributos del objeto o estado del objeto
 	private int id;
 	private String nombre;
@@ -11,6 +11,7 @@ public class Automovil {
 	private Motor motor;
 	private Tanque estanque;
 	private Rueda[] ruedas;
+	private int indiceRueda;
 	private static int ultimoId;
 	private TipoAutomovil tipo;
 	public static final int VELOCIDA_MAXIMA = 120;
@@ -18,6 +19,12 @@ public class Automovil {
 	// Construtores
 	public Automovil() {
 		this.id = ++ultimoId;
+		this.ruedas = new Rueda[5];
+	}
+	
+	public Automovil(String nombre, String modelo) {
+		this.nombre = nombre;
+		this.modelo = modelo;
 	}
 
 	public Automovil(String nombre, String modelo, String color, String placa, Persona1 conductor, Motor motor,
@@ -115,8 +122,9 @@ public class Automovil {
 //		parrafo.append("\n Color:".concat(this.color));
 //		parrafo.append("\n Placa:".concat(this.placa));
 
-		return  "\nConductor:" + conductor +"\n AutoId: " + this.id + "\n Auto: = " + this.nombre + "\n Modelo: = " + this.modelo + "\n Motor:"
-				+ this.motor.getCilindrado() + "\n Color: = " + this.color + "\n Placa: = " + this.placa;
+		return "\nConductor:" + conductor + "\n AutoId: " + this.id + "\n Auto: = " + this.nombre + "\n Modelo: = "
+				+ this.modelo + "\n Motor:" + this.motor.getCilindrado() + "\n Color: = " + this.color + "\n Placa: = "
+				+ this.placa;
 
 	}
 
@@ -153,6 +161,13 @@ public class Automovil {
 				+ this.calcularConsumo(kmh, consumoGasolina);
 	}
 
+	public void addRuerda(Rueda rueda) {
+		if (indiceRueda < this.ruedas.length) {
+			this.ruedas[indiceRueda++] = rueda;
+
+		}
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 
@@ -167,5 +182,18 @@ public class Automovil {
 		return false;
 
 	}
+
+	@Override
+	public String toString() {
+		return nombre + " - " + modelo;
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		Automovil a = (Automovil) o ;
+		return this.nombre.compareTo(a.nombre);
+	}
+	
+	
 
 }

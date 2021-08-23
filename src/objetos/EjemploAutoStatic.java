@@ -1,5 +1,8 @@
 package objetos;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 public class EjemploAutoStatic {
 
 	public static void main(String[] args) {
@@ -11,12 +14,12 @@ public class EjemploAutoStatic {
 				nissanTanque, null);
 		nissan.setTipo(TipoAutomovil.COVERTIBLE);
 		Rueda[] nissanRuedas = new Rueda[5];
-		nissanRuedas[0] = new Rueda("Yokahama", 17, 7.5);
-		nissanRuedas[1] = new Rueda("Yokahama", 17, 7.5);
-		nissanRuedas[2] = new Rueda("Yokahama", 17, 7.5);
-		nissanRuedas[3] = new Rueda("Yokahama", 17, 7.5);
-		nissanRuedas[4] = new Rueda("Yokahama", 17, 7.5);
-		nissan.setRuedas(nissanRuedas);
+		for (int i = 0; i < nissanRuedas.length; i++) {
+
+			nissan.addRuerda(new Rueda("Yokahama", 17, 7.5));
+		}
+
+//		nissan.setRuedas(nissanRuedas);
 
 		// Auto Toyota supra
 		Persona1 toyotaConductor = new Persona1("Reyner", "Finol");
@@ -24,6 +27,11 @@ public class EjemploAutoStatic {
 		Tanque toyotaTanque = new Tanque(30);
 		Automovil toyota = new Automovil("Toyota", "Supra", "naranja", "BC238X6", toyotaConductor, toyotaMotor,
 				toyotaTanque, null);
+		Rueda[] toyotaRuedas = new Rueda[5];
+		for (int i = 0; i < toyotaRuedas.length; i++) {
+			toyota.addRuerda(new Rueda("Pirelli", 16, 6.5));
+		}
+//		toyota.setRuedas(toyotaRuedas);
 
 //		Automovil auto1 = new Automovil("Nissan", "Skyline", "Azul", "AB16Z89", new Motor(3.0, TipoMotor.DIESEL), new Tanque(),);
 //		Automovil auto2 = new Automovil();
@@ -36,11 +44,16 @@ public class EjemploAutoStatic {
 		System.out.println(nissan.detalle());
 
 		for (Rueda r : nissan.getRuedas()) {
-			System.out.println("Fabricante:" + r.getFabricante() + "Aro:" + r.getAro() + "Ancho:" + r.getAncho());
+			System.out.println(
+					"Fabricante:" + r.getFabricante() + " " + "Aro:" + r.getAro() + " " + "Ancho:" + r.getAncho());
 		}
-		
+
 		System.out.println("Velocida maxima: " + Automovil.VELOCIDA_MAXIMA);
 		System.out.println(tipoNissan);
+
+		// auto mazda
+		Automovil mazda = new Automovil("Rx", "Mazda");
+		System.out.println(mazda);
 
 //		System.out.println("Son iguales? " + (nissan == toyota));
 //		System.out.println("Son iguales con equal? " + (nissan.equals(auto1)));
@@ -52,6 +65,12 @@ public class EjemploAutoStatic {
 		System.out.println(nissan.detalleConsumoGasolina(300, 60));
 
 		System.out.println(toyota.detalle());
+		for (Rueda r : toyota.getRuedas()) {
+			System.out.println(
+					"Fabricante:" + r.getFabricante() + " " + "Aro:" + r.getAro() + " " + "Ancho:" + r.getAncho());
+
+		}
+
 		// Principio de encapsulamientp
 		System.out.println(toyota.detalleConsumoGasolina(300, 0.6));
 		System.out.println(toyota.detalleConsumoGasolina(300, 60));
@@ -96,6 +115,16 @@ public class EjemploAutoStatic {
 			System.out.println(ta + "=>" + ta.name() + "," + ta.getNombre() + ", " + ta.getDescripcion() + ", "
 					+ ta.getNumPuertas());
 			System.out.println();
+		}
+
+		Automovil[] autos = new Automovil[3];
+		autos[0] = toyota;
+		autos[1] = nissan;
+		autos[2] = mazda;
+
+		Arrays.sort(autos);
+		for (Automovil a : autos) {
+			System.out.println(a);
 		}
 	}
 
